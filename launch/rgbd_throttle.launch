@@ -1,0 +1,20 @@
+<launch>
+
+	<!-- Arguments -->
+	<arg name="rate"	default="5"/>
+
+	<node name="rgbd_throttle" pkg="ros_utils" type="rgbd_throttle" output="screen" clear_params="true">
+		<param name="rate"				type="double"	value="$(arg rate)"/>
+		<!-- Remap input topics -->
+		<remap from="rgb/info_in"		to="color/camera_info"/>
+		<remap from="rgb/rect_in"		to="color/image_raw"/>
+		<remap from="depth/info_in"		to="aligned_depth_to_color/camera_info"/>
+		<remap from="depth/rect_in"		to="aligned_depth_to_color/image_raw"/>
+		<!-- Remap output topics -->
+		<remap from="rgb/info_out"		to="rgb/camera_info"/>
+		<remap from="rgb/rect_out"		to="rgb/image_rect"/>
+		<remap from="depth/info_out"	to="rgb_depth/camera_info"/>
+		<remap from="depth/rect_out"	to="rgb_depth/image_rect"/>
+	</node>
+
+</launch>
